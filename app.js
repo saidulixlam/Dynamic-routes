@@ -4,7 +4,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 const errorController = require('./controllers/error');
-
+const cors = require('cors');
+ 
 const sequelize = require('./util/database');
 const Product = require('./models/product');
 const User = require('./models/user');
@@ -12,6 +13,7 @@ const Cart=require('./models/cart');
 const CartItem = require('./models/cart-item');
 
 const app = express();
+app.use(cors());
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -51,7 +53,7 @@ sequelize
 .then(user=>{
     if(!user){
         return User.create({name:'Saidul',email:'test@test.com'});
-    }
+    } 
     return user;
     
 })
